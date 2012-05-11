@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <!--<script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?1.27.2"></script>-->
+    <!--<script type="text/javascript" src="http://mbostock.github.com/d3/d3.layout.js?1.27.2"></script>-->
+    <script src="../js/lib/d3/d3.js"> </script>
+</head>
+<body>
+<div id="chart"></div>
+<script src="../js/lib/jquery/jquery.js"> </script>
+<script src="../js/lib/misoproject/dataset/dist/miso.ds.deps.min.0.1.2.js"> </script>
+<script type="text/javascript">
+    var ds = new Miso.Dataset({
+        data: [
+            { one : 1, two : 4, three : 7 },
+            { one : 2, two : 5, three : 8 }
+        ]
+    });
+
+    ds.fetch({
+        success: function() {
+
+            console.log("Junkers ju");
+            console.log(ds);
+
+
+            this.addColumn({
+                type: 'number',
+                name: 'fours'
+            });
+
+            // update all rows where col three == 7
+            this.update(function(row) {
+                return row.three === 7;
+            }, { fours: "989" });
+
+            console.log(this.column('fours').data);
+
+        }
+    });
+
+</script>
+
+</body>
+</html>

@@ -2297,11 +2297,16 @@
         return _.isNaN(v) ? null : +v;
       },
       test : function(v) {
+        /*
         if (v === null || typeof v === "undefined" || typeof v === 'number' || this.regexp.test( v ) ) {
           return true;
         } else {
           return false;
         }
+        */
+        console.log("new way")
+          return v == null || typeof v === 'number' || (this.regexp.test( v ) && typeof v !== 'string');
+
       },
       compare : function(n1, n2) {
         if (n1 == null && n2 != null) { return -1; }

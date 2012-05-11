@@ -2,14 +2,12 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
-    <!--<script type="text/javascript" src="http://mbostock.github.com/d3/d3.js?1.27.2"></script>-->
-    <!--<script type="text/javascript" src="http://mbostock.github.com/d3/d3.layout.js?1.27.2"></script>-->
     <script src="../js/lib/d3/d3.js"> </script>
 </head>
 <body>
 <div id="chart"></div>
 <script src="../js/lib/jquery/jquery.js"> </script>
-<script src="../js/lib/misoproject/dataset/dist/miso.ds.deps.min.0.1.2.js"> </script>
+<script src="../js/lib/misoproject/dataset/dist/miso.ds.deps.0.1.2.js"> </script>
 <script type="text/javascript">
     var ds = new Miso.Dataset({
         data: [
@@ -18,23 +16,24 @@
         ]
     });
 
+    var globalstring = "globalString";
+
     ds.fetch({
         success: function() {
-
-            console.log("Junkers ju");
-            console.log(ds);
-
-
             this.addColumn({
-                type: 'number',
+                type: 'string',
                 name: 'fours'
             });
 
+            a= new Object();
+            a.fours="";
+
             // update all rows where col three == 7
             this.update(function(row) {
-                return row.three === 7;
-            }, { fours: "989" });
-
+                a.fours = row.one.toString();
+                console.log("a.fours is a " + typeof(a.fours));
+                return true;
+            }, a  );
             console.log(this.column('fours').data);
 
         }

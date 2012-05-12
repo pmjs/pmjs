@@ -5,21 +5,29 @@
     <script src="../js/lib/d3/d3.js"> </script>
 </head>
 <body>
-<div id="chart"></div>
+<div id="logboxdiv">
+    <label id="logbox"><u> <b>Log Messages </b></u></label>
+</div>
 <script src="../js/lib/jquery/jquery.js"> </script>
 <script src="../js/lib/misoproject/dataset/dist/miso.ds.deps.0.1.2.js"> </script>
 <script type="text/javascript">
+    /*
+    Purpose : Create a derived column based on the data present in existing columns
+     */
+    var logbox = $("label");
 
-
-
+    function log(obj)
+    {
+        var txt = logbox.html();
+        logbox.html(txt + '<br>' + JSON.stringify(obj)) ;
+        console.log(obj);
+    }
     var ds = new Miso.Dataset({
         data: [
             { one : 1, two : 4, three : 7 },
             { one : 2, two : 5, three : 8 }
         ]
     });
-
-    var globalstring = "globalString";
 
     ds.fetch({
         success: function() {
@@ -34,10 +42,11 @@
             // update all rows where col three == 7
             this.update(function(row) {
                 a.fours = row.one.toString();
-                console.log("a.fours is a " + typeof(a.fours));
+                log("a.fours is a " + typeof(a.fours));
                 return true;
             }, a  );
-            console.log(this.column('fours').data);
+            log(this.column('fours').data) ;
+
 
         }
     });

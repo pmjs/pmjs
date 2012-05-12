@@ -2304,8 +2304,7 @@
           return false;
         }
         */
-        console.log("new way")
-          return v == null || typeof v === 'number' || (this.regexp.test( v ) && typeof v !== 'string');
+            return v == null || typeof v === 'number' || (this.regexp.test( v ) && typeof v !== 'string');
 
       },
       compare : function(n1, n2) {
